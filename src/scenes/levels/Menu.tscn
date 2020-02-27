@@ -1,16 +1,102 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://textures/menu/Menu.png" type="Texture" id=1]
+[ext_resource path="res://scenes/levels/Menu.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxLine" id=1]
+grow_end = 4.0
+thickness = 5
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxLine" id=3]
+grow_end = 4.0
+thickness = 5
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxLine" id=5]
+grow_end = 4.0
+thickness = 5
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxLine" id=7]
+grow_end = 4.0
+thickness = 5
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="background" type="TextureRect" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_pivot_offset = Vector2( 626.408, 443.982 )
 texture = ExtResource( 1 )
 stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="new_game" type="Button" parent="."]
+margin_left = 175.0
+margin_top = 370.0
+margin_right = 470.0
+margin_bottom = 435.0
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="load_game" type="Button" parent="."]
+margin_left = 175.0
+margin_top = 445.0
+margin_right = 470.0
+margin_bottom = 510.0
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="Button" parent="."]
+margin_left = 175.0
+margin_top = 520.0
+margin_right = 470.0
+margin_bottom = 585.0
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Button" parent="."]
+margin_left = 185.0
+margin_top = 595.0
+margin_right = 470.0
+margin_bottom = 660.0
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
