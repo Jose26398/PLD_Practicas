@@ -19,7 +19,6 @@ signal health_changed(current_hp)
 
 export(String, "up", "down", "left", "right") var facing = "down"
 
-var despawn_fx = preload("res://scenes/misc/DespawnFX.tscn")
 
 var anim = ""
 var new_anim = ""
@@ -30,15 +29,7 @@ var state = STATE_IDLE
 
 # Move the player to the corresponding spawnpoint, if any and connect to the dialog system
 func _ready():
-	var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
-	for spawnpoint in spawnpoints:
-		if spawnpoint.name == Globals.spawnpoint:
-			global_position = spawnpoint.global_position
-			break
-	if not (
-			Dialogs.connect("dialog_started", self, "_on_dialog_started") == OK and
-			Dialogs.connect("dialog_ended", self, "_on_dialog_ended") == OK ):
-		printerr("Error connecting to dialog system")
+	
 	pass
 
 
@@ -151,12 +142,6 @@ func _update_facing():
 
 
 func despawn():
-	var despawn_particles = despawn_fx.instance()
-	get_parent().add_child(despawn_particles)
-	despawn_particles.global_position = global_position
-	hide()
-	yield(get_tree().create_timer(5.0), "timeout")
-	get_tree().reload_current_scene()
 	pass
 
 
