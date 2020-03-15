@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://textures/characters/Player/Player.png" type="Texture" id=1]
+[ext_resource path="res://scenes/characters/Enemy.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.11365
+height = 0.334778
+
+[sub_resource type="Animation" id=2]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.111 ) ]
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+position = Vector2( 500, 250 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 60
+frame = 18
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( -0.599594, 8.91848 )
+scale = Vector2( 1.784, 1 )
+shape = SubResource( 1 )
+
+[node name="hurtbox" type="Area2D" parent="."]
+monitorable = false
+collision_mask = 32
+
+[node name="col" type="CollisionPolygon2D" parent="hurtbox"]
+polygon = PoolVector2Array( 0.216492, 12.8064, 2.98946, 12.8814, 5.16287, 12.8814, 5.08794, 11.1576, 7.11143, 11.0827, 6.96156, 10.0335, 9.35979, 9.65874, 9.73451, 9.13413, 10.1092, 8.23479, 9.50969, 7.11062, 9.13496, 6.21127, 9.13496, 5.01215, 8.46046, 4.41259, 8.46046, 3.06358, 7.56111, 2.61391, 7.11143, 1.26489, 6.51189, 0.740273, 5.91232, 0.21566, 5.83739, -1.73291, 5.83739, -2.7072, 5.38771, -3.53159, 5.08794, -4.43093, 5.08794, -5.55511, 5.61253, -6.00478, 6.13716, -6.30457, 6.21211, -7.95335, 6.13716, -9.07753, 6.13716, -10.0518, 6.06221, -10.4265, 5.08794, -10.9512, 3.51408, -11.0261, 2.38991, -10.0518, 1.94023, -9.60215, 0.891006, -9.45226, 0.44133, -9.07753, -1.13252, -8.77775, -2.1068, -9.90192, -3.53076, -9.82698, -3.7556, -10.7263, -6.52856, -10.8762, -7.27802, -9.82698, -7.12813, -6.60435, -6.07889, -5.8549, -6.00395, -4.2061, -7.27802, -2.48236, -7.05318, 0.21566, -7.95251, 1.26489, -8.1024, 2.16424, -8.62703, 3.06358, -8.9268, 4.9372, -10.3508, 5.46181, -10.6505, 7.18555, -11.1752, 7.48534, -11.1002, 9.13413, -8.70198, 9.7337, -8.32726, 11.1576, -6.15384, 11.4574, -6.22878, 12.6565, -1.65714, 13.1812, -1.05757, 11.4574, 0.0666046, 11.4574 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Die = SubResource( 2 )
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -52,7 +52,7 @@ func get_input_axis():
 	## UPDATE ANIMATION
 	if new_anim != anim:
 		anim = new_anim
-		state_machine.travel(anim)
+		$AnimationPlayer.play(anim)
 	
 	return axis.normalized()
 	
