@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/levels/Escena1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://textures/lights/light.png" type="Texture" id=5]
 
 [node name="Node2D" type="Node2D"]
@@ -14,10 +13,6 @@ tile_data = PoolIntArray( -393217, 2, 0, -458752, 2, 1, -458751, 2, 1, -458750, 
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 951.202, 585.082 )
-scale = Vector2( 4, 4 )
-
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1304.86, 1163.05 )
 scale = Vector2( 4, 4 )
 
 [node name="Light2D" type="Light2D" parent="."]

@@ -1,71 +1,77 @@
 extends KinematicBody2D
 
-var MAX_SPEED = 700
-var ACCELERATION = 5000
-var motion = Vector2.ZERO
+const ACCELERATION = 4000
+const MAX_SPEED = 400
+const ROLL_SPEED = 120
+const FRICTION = 500
 
-var anim = ""
-var new_anim = ""
-var state_machine
+enum {
+	MOVE,
+	ROLL,
+	ATTACK
+}
 
-export(String, "U", "D", "L", "R") var facing = "D"
+var state = MOVE
+var velocity = Vector2.ZERO
+var roll_vector = Vector2.LEFT
+
+onready var animationPlayer = $AnimationPlayer
+onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
+#onready var swordHitbox = $player_sword/slash
 
 func _ready():
-	state_machine = $AnimationTree.get("parameters/playback")
-	state_machine.start("Idle")
+	animationTree.active = true
+	#wordHitbox.knockback_vector = roll_vector
 
 func _physics_process(delta):
-	var axis = get_input_axis()
-	if axis == Vector2.ZERO:
+	match state:
+		MOVE:
+			move_state(delta)
+	
+func move_state(delta):
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector = input_vector.normalized()
+	
+	
+	if input_vector != Vector2.ZERO:
+		#roll_vector = input_vector
+		#swordHitbox.knockback_vector = input_vector
+		animationTree.set("parameters/Idle/blend_position", input_vector)
+		animationTree.set("parameters/Run/blend_position", input_vector)
+		#animationTree.set("parameters/Attack/blend_position", input_vector)
+		#animationTree.set("parameters/Roll/blend_position", input_vector)
+		animationState.travel("Run")
+		apply_movement(input_vector * ACCELERATION * delta)
+		velocity = velocity.move_toward(input_vector * MAX_SPEED, delta)
+	else:
+		animationState.travel("Idle")
 		apply_friction(ACCELERATION * delta)
-	else:
-		apply_movement(axis * ACCELERATION * delta)
-		
-	motion = move_and_slide(motion)
+		velocity = velocity.move_toward(Vector2.ZERO,  delta)
 	
+	move()
 	
-func get_input_axis():
-	var current = state_machine.get_current_node()
-	var axis = Vector2.ZERO
-	axis.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	if axis.x > 0:
-		new_anim = "Right"
-		facing = "R"
-	elif axis.x < 0:
-		new_anim = "Left"
-		facing = "L"
-		
-	axis.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-	if axis.y > 0:
-		new_anim = "Down"
-		facing = "D"
-	elif axis.y < 0:
-		new_anim = "Up"
-		facing = "U"
-		
-	if axis == Vector2.ZERO:
-		new_anim = "Idle"
-		
-	if Input.is_action_pressed("attack"):
-		new_anim = "Attack" + facing
-		
-	## UPDATE ANIMATION
-	if new_anim != anim:
-		anim = new_anim
-		$AnimationPlayer.play(anim)
+	#if Input.is_action_just_pressed("roll"):
+	#	state = ROLL
 	
-	return axis.normalized()
-	
-	
+	#if Input.is_action_just_pressed("attack"):
+	#	state = ATTACK
+
+
+func move():
+	velocity = move_and_slide(velocity)
+
+
 func apply_friction(amount):
-	if motion.length() > amount:
-		motion -= motion.normalized() * amount
+	if velocity.length() > amount:
+		velocity -= velocity.normalized() * amount
 	else:
-		motion = Vector2.ZERO
+		velocity = Vector2.ZERO
 
 
 func apply_movement(acceleration):
-	motion += acceleration
-	motion = motion.clamped(MAX_SPEED)
+	velocity += acceleration
+	velocity = velocity.clamped(MAX_SPEED)
 
-	
