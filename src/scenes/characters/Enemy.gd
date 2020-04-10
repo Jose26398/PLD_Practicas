@@ -1,12 +1,20 @@
 extends KinematicBody2D
 
+export var ACCELERATION = 300
+export var MAX_SPEED = 50
+export var FRICTION = 200
 
-func enemy_die():
-	print("dioshngfiud")
-	var pushback_direction = (global_position).normalized()
-	#move_and_slide( pushback_direction * 5000)
-	$AnimationPlayer.play("Die")
-		
+var knockback = Vector2.ZERO
+onready var stats = $Stats
+
+func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+	knockback = move_and_slide(knockback)
+
 
 func _on_Hurtbox_area_entered(area):
-	enemy_die()
+	stats.health -= area.damage
+	knockback = area.knockback_vector * 200
+	
+func _on_Stats_no_health():
+	queue_free()

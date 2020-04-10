@@ -1,8 +1,9 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://textures/characters/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://scenes/characters/Player.gd" type="Script" id=2]
 [ext_resource path="res://hitboxes/Hurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hitboxes/SwordHitbox.gd" type="Script" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -5.80902, 13.2572, -2.60513, 14.0404, 3.30429, 13.4708, 4.72827, 13.3996, 5.44025, 11.5485, 5.01306, 9.12778, 3.37549, 8.62938, 0.242798, 8.0598, -3.24591, 8.48698, -6.02261, 9.41257, -6.3786, 11.5485 )
@@ -620,6 +621,7 @@ __meta__ = {
 position = Vector2( 16, 0 )
 collision_layer = 0
 collision_mask = 8
+script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="Position2D/SwordHitbox" index="0"]
 shape = SubResource( 42 )
