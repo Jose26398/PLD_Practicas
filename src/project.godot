@@ -23,6 +23,10 @@ config/icon="res://icon.png"
 
 default_bus_layout=""
 
+[autoload]
+
+PlayerStats="*res://scenes/characters/PlayerStats.tscn"
+
 [display]
 
 window/size/width=1280
@@ -76,6 +80,7 @@ roll={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="PlayerHurtbox"
 2d_physics/layer_4="EnemyHurtbox"
+2d_physics/layer_5="Enemy"
 
 [rendering]
 

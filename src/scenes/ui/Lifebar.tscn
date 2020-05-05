@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ui/Lifebar.gd" type="Script" id=1]
+[ext_resource path="res://textures/ui/lifebar_fill.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui/lifebar_bg.png" type="Texture" id=3]
+
+[node name="Lifebar" type="Control"]
+margin_right = 64.0
+margin_bottom = 24.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeBarUI" type="TextureProgress" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 406.0
+margin_bottom = 63.0
+rect_scale = Vector2( 0.5, 0.3 )
+max_value = 100.0
+value = 50.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://textures/characters/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://scenes/characters/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://hitboxes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/characters/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/characters/PlayerDetectionZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://hitboxes/Hitbox.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.31246
@@ -26,15 +27,20 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 6.06224
-height = 10.078
+radius = 5.51515
+height = 8.07689
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 101.422
 
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 6.78282
+height = 3.11519
+
 [node name="Enemy1" type="KinematicBody2D"]
 position = Vector2( 500, 250 )
 scale = Vector2( 2, 2 )
+collision_layer = 16
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -42,7 +48,7 @@ texture = ExtResource( 1 )
 hframes = 60
 frame = 18
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.356003, 9.32692 )
 scale = Vector2( 2, 1 )
 shape = SubResource( 1 )
@@ -51,9 +57,10 @@ shape = SubResource( 1 )
 anims/Die = SubResource( 2 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( -0.524628, 1.79868 )
+position = Vector2( -0.449677, 3.29757 )
 shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
@@ -62,11 +69,22 @@ shape = SubResource( 3 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 1, 1, 0.219608 )
-position = Vector2( 0.5, 0.5 )
+position = Vector2( -0.92395, 0.275177 )
 shape = SubResource( 4 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 6 )]
+collision_mask = 4
+damage = 10
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( -0.581146, 3.4868 )
+scale = Vector2( 2, 1 )
+shape = SubResource( 5 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]
 
 [editable path="PlayerDetectionZone"]
+
+[editable path="Hitbox"]
