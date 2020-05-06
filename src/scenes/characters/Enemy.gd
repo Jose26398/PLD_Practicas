@@ -10,9 +10,9 @@ enum {
 
 var state = CHASE
 
-const ACCELERATION = 1500
-const MAX_SPEED = 100
-const FRICTION = 100
+const ACCELERATION = 2000
+const MAX_SPEED = 400
+const FRICTION = 300
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO

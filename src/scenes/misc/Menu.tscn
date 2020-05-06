@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://textures/menu/Menu.png" type="Texture" id=1]
+[ext_resource path="res://scenes/misc/Menu.gd" type="Script" id=2]
+[ext_resource path="res://fonts/buttons.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.498039, 0.203922, 0.847059, 0.156863 )
+border_width_left = 4
+border_width_right = 4
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.498039, 0.203922, 0.847059, 0.882353 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 626.408, 443.982 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 77.0
+margin_top = -2.0
+margin_right = 548.0
+margin_bottom = 303.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="new_game" type="Button" parent="menu"]
+margin_right = 471.0
+margin_bottom = 73.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "NEW GAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="load_game" type="Button" parent="menu"]
+margin_top = 77.0
+margin_right = 471.0
+margin_bottom = 150.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "LOAD GAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="Button" parent="menu"]
+margin_top = 154.0
+margin_right = 471.0
+margin_bottom = 227.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "OPTIONS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Button" parent="menu"]
+margin_top = 231.0
+margin_right = 471.0
+margin_bottom = 305.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 10 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "EXIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="menu/new_game" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="menu/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="menu/exit" to="." method="_on_exit_pressed"]

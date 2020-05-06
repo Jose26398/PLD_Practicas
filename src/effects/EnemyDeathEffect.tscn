@@ -62,6 +62,7 @@ animations = [ {
 } ]
 
 [node name="EnemyDeathEffect" type="AnimatedSprite"]
+scale = Vector2( 3, 3 )
 frames = SubResource( 11 )
 animation = "Animate"
 offset = Vector2( 0, -8 )
