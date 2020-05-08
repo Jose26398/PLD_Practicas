@@ -7,24 +7,12 @@
 [ext_resource path="res://scenes/characters/PlayerDetectionZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://hitboxes/Hitbox.tscn" type="PackedScene" id=6]
 
+[sub_resource type="OccluderPolygon2D" id=6]
+polygon = PoolVector2Array( -5.61176, 12.3838, -1.83438, 13.6429, 3.00839, 13.2555, 5.6235, 11.7058, 5.52664, 9.57495, 2.42728, 8.89696, -2.41551, 9.09067, -5.22433, 9.38124, -6.48346, 10.7372 )
+
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.31246
 height = 1.27753
-
-[sub_resource type="Animation" id=2]
-resource_name = "Die"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.111 ) ]
-}
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 5.51515
@@ -48,13 +36,13 @@ texture = ExtResource( 1 )
 hframes = 60
 frame = 18
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
+occluder = SubResource( 6 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.356003, 9.32692 )
 scale = Vector2( 2, 1 )
 shape = SubResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Die = SubResource( 2 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8

@@ -11,7 +11,7 @@ enum {
 var state = CHASE
 
 const ACCELERATION = 2000
-const MAX_SPEED = 400
+const MAX_SPEED = 300
 const FRICTION = 300
 
 var velocity = Vector2.ZERO

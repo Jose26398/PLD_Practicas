@@ -9,7 +9,7 @@
 polygon = PoolVector2Array( -5.80902, 13.2572, -2.60513, 14.0404, 3.30429, 13.4708, 4.72827, 13.3996, 5.44025, 11.5485, 5.01306, 9.12778, 3.37549, 8.62938, 0.242798, 8.0598, -3.24591, 8.48698, -6.02261, 9.41257, -6.3786, 11.5485 )
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 6.7916
+radius = 4.73737
 height = 3.12024
 
 [sub_resource type="Animation" id=3]
@@ -605,7 +605,7 @@ states/Run/node = SubResource( 38 )
 states/Run/position = Vector2( 598, 80 )
 transitions = [ "Roll", "Run", SubResource( 39 ), "Run", "Roll", SubResource( 40 ), "Roll", "Idle", SubResource( 41 ), "Idle", "Roll", SubResource( 42 ), "Idle", "Attack", SubResource( 43 ), "Attack", "Idle", SubResource( 44 ), "Idle", "Run", SubResource( 45 ), "Run", "Idle", SubResource( 46 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 0, -63.0681 )
+graph_offset = Vector2( -1, -53.0681 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=48]
 
@@ -626,12 +626,12 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 60
-frame = 36
+frame = 18
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 occluder = SubResource( 1 )
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.405334, 9.21585 )
 scale = Vector2( 1, 0.5 )
 shape = SubResource( 2 )
