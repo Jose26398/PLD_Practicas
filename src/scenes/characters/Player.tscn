@@ -67,6 +67,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Position2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( -0.05 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -5 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "AttackL"
@@ -235,6 +247,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Position2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=7]
 length = 0.6
@@ -348,7 +372,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=14]
-length = 0.25
+length = 0.3
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -358,7 +382,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 55, 56, 57, 58, 59 ]
@@ -379,7 +403,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=15]
-length = 0.25
+length = 0.3
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -389,7 +413,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 50, 51, 52, 53, 54 ]
@@ -410,7 +434,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=16]
-length = 0.25
+length = 0.3
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -420,7 +444,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 40, 41, 42, 43, 44 ]
@@ -441,7 +465,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=17]
-length = 0.25
+length = 0.3
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -451,7 +475,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 45, 46, 47, 48, 49 ]
@@ -610,7 +634,8 @@ graph_offset = Vector2( -1, -53.0681 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=48]
 
 [sub_resource type="CapsuleShape2D" id=49]
-height = 12.0
+radius = 9.52887
+height = 14.1412
 
 [sub_resource type="CapsuleShape2D" id=50]
 radius = 5.25162
@@ -626,7 +651,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 60
-frame = 18
+frame = 30
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 occluder = SubResource( 1 )
@@ -665,8 +690,7 @@ parameters/Roll/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0.00944674, -0.456897 )
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 0, 3 )
-rotation = 1.5708
+rotation = 4.71239
 __meta__ = {
 "_gizmo_extents_": 8.0
 }
@@ -679,7 +703,6 @@ damage = 25
 
 [node name="CollisionShape2D" parent="Position2D/SwordHitbox" index="0"]
 shape = SubResource( 49 )
-disabled = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 4
