@@ -3,7 +3,7 @@ extends KinematicBody2D
 const ACCELERATION = 4000
 const MAX_SPEED = 600
 const ATTACK_SPEED = 500
-const ROLL_SPEED = 750
+const ROLL_SPEED = 900
 const FRICTION = 300
 
 enum {

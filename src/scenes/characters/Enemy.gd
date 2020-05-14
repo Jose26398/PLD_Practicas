@@ -11,15 +11,21 @@ enum {
 var state = CHASE
 
 const ACCELERATION = 2000
-const MAX_SPEED = 300
-const FRICTION = 300
+const MAX_SPEED = 400
+const FRICTION = 200
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
+onready var animationPlayer = $AnimationPlayer
+onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtbox = $Hurtbox
+
+func _ready():
+	animationTree.active = true
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -37,7 +43,11 @@ func _physics_process(delta):
 			if player != null:
 				var direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+				animationTree.set("parameters/Idle/blend_position", direction)
+				animationTree.set("parameters/Run/blend_position", direction)
+				animationState.travel("Run")
 			else:
+				animationState.travel("Idle")
 				state = IDLE
 				
 	velocity = move_and_slide(velocity)
