@@ -22,5 +22,17 @@ func _on_Resume_pressed():
 	scene_tree.set_input_as_handled()
 
 
+func _on_Save_pressed():
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(get_tree().get_current_scene())
+	ResourceSaver.save("res://my_scene.tscn", packed_scene)
+
+
+func _on_Load_pressed():
+	self.paused = not paused
+	scene_tree.set_input_as_handled()
+	get_tree().change_scene("res://my_scene.tscn")
+
+
 func _on_Quit_pressed():
 	get_tree().quit()

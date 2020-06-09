@@ -126,5 +126,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="menu/new_game" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="menu/load_game" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="menu/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="menu/exit" to="." method="_on_exit_pressed"]
