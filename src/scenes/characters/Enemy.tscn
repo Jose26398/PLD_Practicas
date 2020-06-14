@@ -213,7 +213,9 @@ radius = 101.422
 radius = 2.04923
 height = 11.3477
 
-[node name="Enemy1" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=[
+"Persist",
+]]
 position = Vector2( 500, 250 )
 scale = Vector2( 2, 2 )
 collision_layer = 16

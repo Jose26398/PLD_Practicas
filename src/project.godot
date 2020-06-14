@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/characters/Player.gd"
+}, {
+"base": "Area2D",
+"class": "to_inside",
+"language": "GDScript",
+"path": "res://scenes/misc/to_inside.gd"
+} ]
 _global_script_class_icons={
-
+"Player": "",
+"to_inside": ""
 }
 
 [application]
@@ -26,6 +37,7 @@ default_bus_layout=""
 [autoload]
 
 PlayerStats="*res://scenes/characters/PlayerStats.tscn"
+SceneChanger="*res://effects/SceneChanger.tscn"
 
 [display]
 

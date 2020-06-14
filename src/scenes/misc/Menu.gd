@@ -6,8 +6,8 @@ func _on_new_game_pressed():
 
 
 func _on_load_game_pressed():
-	get_tree().change_scene("res://my_scene.tscn")
-
+	get_tree().change_scene("res://savegame.tscn")
+	
 
 func _on_options_pressed() -> void:
 	get_tree().change_scene("res://scenes/misc/Controls.tscn")

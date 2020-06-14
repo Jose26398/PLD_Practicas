@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 const ACCELERATION = 4000
 const MAX_SPEED = 600
 const ATTACK_SPEED = 500
@@ -27,6 +29,8 @@ func _ready():
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
+	if not stats.spawnpoint == null:
+		position = stats.spawnpoint
 
 func _physics_process(delta):
 	match state:
