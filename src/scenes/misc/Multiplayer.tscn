@@ -1,0 +1,170 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://textures/menu/Menu.png" type="Texture" id=1]
+[ext_resource path="res://scenes/misc/Multiplayer.gd" type="Script" id=2]
+[ext_resource path="res://fonts/buttons.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/font-bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.341176, 0.168627, 0.352941, 0 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 30
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.498039, 0.203922, 0.847059, 0.156863 )
+border_width_left = 4
+border_width_right = 4
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.498039, 0.203922, 0.847059, 0.882353 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="Multiplayer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 626.408, 443.982 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 77.0
+margin_top = 12.0
+margin_right = 829.0
+margin_bottom = 408.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu"]
+margin_right = 752.0
+margin_bottom = 52.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="menu/HBoxContainer"]
+margin_right = 147.0
+margin_bottom = 52.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "LOBBY"
+align = 1
+
+[node name="LineEdit" type="LineEdit" parent="menu/HBoxContainer"]
+margin_left = 151.0
+margin_right = 752.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
+custom_colors/selection_color = Color( 0.345098, 0.121569, 0.611765, 0.792157 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+
+[node name="join_game" type="Button" parent="menu"]
+margin_top = 56.0
+margin_right = 752.0
+margin_bottom = 138.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "JOIN SERVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="create_game" type="Button" parent="menu"]
+margin_top = 142.0
+margin_right = 752.0
+margin_bottom = 224.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "CREATE SERVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="load_game" type="Button" parent="menu"]
+margin_top = 228.0
+margin_right = 752.0
+margin_bottom = 310.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "LOAD GAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Button" parent="menu"]
+margin_top = 314.0
+margin_right = 752.0
+margin_bottom = 396.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.176471, 0.552941, 0.717647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "BACK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="menu/join_game" to="." method="_on_join_game_pressed"]
+[connection signal="pressed" from="menu/create_game" to="." method="_on_create_game_pressed"]
+[connection signal="pressed" from="menu/load_game" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="menu/back" to="." method="_on_back_pressed"]

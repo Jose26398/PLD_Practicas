@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://scenes/levels/Escena1.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/levels/Inside.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/misc/to_inside.gd" type="Script" id=2]
 [ext_resource path="res://scenes/characters/Player.gd" type="Script" id=3]
 [ext_resource path="res://scenes/ui/Lifebar.tscn" type="PackedScene" id=4]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/misc/Pause.gd" type="Script" id=9]
 [ext_resource path="res://scenes/characters/Enemy.gd" type="Script" id=10]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=11]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.01228, 1.92619 )

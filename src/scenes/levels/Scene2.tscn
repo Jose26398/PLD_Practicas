@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenes/levels/Escena1.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/levels/Inside.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/Lifebar.tscn" type="PackedScene" id=4]
@@ -109,16 +109,16 @@ scale = Vector2( 4, 4 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
 
-[node name="Escena1" type="Area2D" parent="YSort"]
+[node name="Scene1" type="Area2D" parent="YSort"]
 script = ExtResource( 7 )
-target_scene = "res://scenes/levels/Escena1.tscn"
+target_scene = "res://scenes/levels/Scene1.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Escena1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Scene1"]
 position = Vector2( 1406.61, 1729.8 )
 scale = Vector2( 25, 25 )
 shape = SubResource( 1 )
 
-[node name="DoorSpawn" type="Position2D" parent="YSort/Escena1"]
+[node name="DoorSpawn" type="Position2D" parent="YSort/Scene1"]
 position = Vector2( 1150, -100 )
 
 [node name="Enemy1" parent="YSort" instance=ExtResource( 3 )]

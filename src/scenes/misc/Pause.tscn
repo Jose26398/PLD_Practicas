@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/misc/Pause.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 150
+size = 300
 outline_size = 2
 outline_color = Color( 0.823529, 0.211765, 0.92549, 1 )
 use_filter = true
@@ -25,7 +25,7 @@ bg_color = Color( 0.498039, 0.203922, 0.847059, 0.196078 )
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.156863 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 26
+size = 45
 outline_size = 1
 outline_color = Color( 0.8, 0.109804, 0.321569, 1 )
 extra_spacing_top = 6
@@ -52,10 +52,10 @@ __meta__ = {
 [node name="Label" type="Label" parent="ColorRect"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -448.0
-margin_top = 63.0
-margin_right = 449.0
-margin_bottom = 261.0
+margin_left = -667.0
+margin_top = 15.0
+margin_right = 669.0
+margin_bottom = 310.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "PAUSED"
@@ -70,18 +70,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -276.0
-margin_top = -9.99997
-margin_right = 277.0
-margin_bottom = 265.0
+margin_left = -461.0
+margin_top = -102.0
+margin_right = 461.0
+margin_bottom = 357.0
 custom_constants/separation = 40
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Resume" type="Button" parent="ColorRect/VBoxContainer"]
-margin_right = 553.0
-margin_bottom = 38.0
+margin_right = 922.0
+margin_bottom = 84.0
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -92,9 +92,9 @@ custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 text = "RESUME"
 
 [node name="Save" type="Button" parent="ColorRect/VBoxContainer"]
-margin_top = 78.0
-margin_right = 553.0
-margin_bottom = 116.0
+margin_top = 124.0
+margin_right = 922.0
+margin_bottom = 208.0
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -105,9 +105,9 @@ custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 text = "SAVE GAME"
 
 [node name="Load" type="Button" parent="ColorRect/VBoxContainer"]
-margin_top = 156.0
-margin_right = 553.0
-margin_bottom = 194.0
+margin_top = 248.0
+margin_right = 922.0
+margin_bottom = 332.0
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -118,9 +118,9 @@ custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 text = "LOAD GAME"
 
 [node name="Quit" type="Button" parent="ColorRect/VBoxContainer"]
-margin_top = 234.0
-margin_right = 553.0
-margin_bottom = 274.0
+margin_top = 372.0
+margin_right = 922.0
+margin_bottom = 459.0
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )

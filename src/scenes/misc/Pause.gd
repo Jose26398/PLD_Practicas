@@ -35,4 +35,5 @@ func _on_Load_pressed():
 
 
 func _on_Quit_pressed():
-	get_tree().quit()
+	MenuChanger.change_scene("res://scenes/misc/Menu.tscn")
+	self.paused = not paused

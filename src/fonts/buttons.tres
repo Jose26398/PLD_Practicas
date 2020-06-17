@@ -3,7 +3,7 @@
 [ext_resource path="res://fonts/font-bold.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 40
+size = 45
 outline_size = 1
 outline_color = Color( 0.886275, 0.117647, 0.427451, 1 )
 use_filter = true
