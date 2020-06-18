@@ -18,6 +18,7 @@ var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.LEFT
 var stats = PlayerStats
+var nickname = ""
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -113,3 +114,10 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 	stats.health -= area.damage
+
+
+func init(nickname, start_position, is_slave):
+	self.nickname = nickname
+	global_position = start_position
+	if is_slave:
+		$Sprite.texture = load('res://textures/characters/Player/Player.png')

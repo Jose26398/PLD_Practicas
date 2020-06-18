@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.01228, 1.92619 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Scene2" type="Node2D"]
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 layer = 100

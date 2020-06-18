@@ -39,12 +39,12 @@ default_bus_layout=""
 PlayerStats="*res://scenes/characters/PlayerStats.tscn"
 SceneChanger="*res://effects/SceneChanger.tscn"
 MenuChanger="*res://effects/MenuChanger.tscn"
+Network="*res://config/Network.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
-window/size/fullscreen=true
 window/stretch/mode="viewport"
 
 [input]

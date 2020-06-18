@@ -645,6 +645,7 @@ height = 4.70282
 "Persist",
 "player",
 ]]
+scale = Vector2( 4, 4 )
 collision_layer = 2
 script = ExtResource( 2 )
 
