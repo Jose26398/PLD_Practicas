@@ -26,14 +26,14 @@ func _on_join_pressed():
 		print("Invalid name!")
 		return
 
-	var ip = get_node("connect/IP").text
+	var ip = get_node("connect/ip").text
 	if not ip.is_valid_ip_address():
 		print("Invalid IPv4 address!")
 		return
 
 	#################get_node("connect/error_label").text=""
-	get_node("connect/host").disabled = true
-	get_node("connect/join").disabled = true
+	get_node("connect/hBox/host").disabled = true
+	get_node("connect/hBox/join").disabled = true
 
 	var player_name = get_node("connect/name").text
 	Network.join_game(ip, player_name)
@@ -80,5 +80,7 @@ func _on_back_pressed():
 
 
 func _on_back2_pressed():
+	get_node("connect/hBox/host").disabled = false
+	get_node("connect/hBox/join").disabled = false
 	get_node("connect").show()
 	get_node("players").hide()

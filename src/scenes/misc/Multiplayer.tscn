@@ -92,7 +92,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "PLAYER1"
 align = 1
 
-[node name="IP" type="Label" parent="connect"]
+[node name="ip_label" type="Label" parent="connect"]
 margin_top = 137.0
 margin_right = 608.0
 margin_bottom = 189.0
@@ -102,7 +102,7 @@ text = "IP"
 align = 1
 valign = 1
 
-[node name="ip_label" type="LineEdit" parent="connect"]
+[node name="ip" type="LineEdit" parent="connect"]
 margin_top = 209.0
 margin_right = 608.0
 margin_bottom = 254.0

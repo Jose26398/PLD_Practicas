@@ -7,7 +7,7 @@ const DEFAULT_PORT = 10567
 const MAX_PEERS = 12
 
 # Name for my player
-var player_name = "The Warrior"
+var player_name = ""
 
 # Names for remote players in id:name format
 var players = {}
@@ -65,22 +65,31 @@ remote func pre_start_game(spawn_points):
 	# Change scene
 	var world = load("res://scenes/levels/Scene1.tscn").instance()
 	get_tree().get_root().add_child(world)
-
+	get_tree().set_current_scene(world)
 	get_tree().get_root().get_node("Multiplayer").queue_free()
 
 	var player_scene = load("res://scenes/characters/Player.tscn")
 
 	for p_id in spawn_points:
-		var spawn_pos = world.get_node("spawnpoint").position
+		var spawn_pos = world.get_node("spawnpoints/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
+		var remote_transform = RemoteTransform2D.new()
+		remote_transform.set_remote_node(world.get_node("Camera2D").get_path())
 
 		player.set_name(str(p_id)) # Use unique ID as node name
 		player.position=spawn_pos
 		player.set_network_master(p_id) #set unique id as master
+		player.add_child(remote_transform)
+
+		if p_id == get_tree().get_network_unique_id():
+			# If node for this peer id, set name
+			player.set_player_name(player_name)
+		else:
+			# Otherwise set name from peer
+			player.set_player_name(players[p_id])
 
 		world.get_node("YSort/players").add_child(player)
-
-
+		
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
@@ -126,8 +135,7 @@ func begin_game():
 
 	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing
 	var spawn_points = {}
-	spawn_points[1] = 0 # Server in spawn point 0
-	var spawn_point_idx = 1
+	var spawn_point_idx = 0
 	for p in players:
 		spawn_points[p] = spawn_point_idx
 		spawn_point_idx += 1
@@ -138,9 +146,9 @@ func begin_game():
 	pre_start_game(spawn_points)
 
 func end_game():
-	if has_node("/root/world"): # Game is in progress
+	if has_node("/root/Scene1"): # Game is in progress
 		# End it
-		get_node("/root/world").queue_free()
+		get_node("/root/Scene1").queue_free()
 
 	emit_signal("game_ended")
 	players.clear()

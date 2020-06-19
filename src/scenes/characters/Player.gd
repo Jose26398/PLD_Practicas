@@ -115,9 +115,5 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.create_hit_effect()
 	stats.health -= area.damage
 
-
-func init(nickname, start_position, is_slave):
-	self.nickname = nickname
-	global_position = start_position
-	if is_slave:
-		$Sprite.texture = load('res://textures/characters/Player/Player.png')
+func set_player_name(new_name):
+	get_node("Label").set_text(new_name)

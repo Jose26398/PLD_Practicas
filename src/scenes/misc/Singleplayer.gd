@@ -1,7 +1,6 @@
 extends Control
 
 
-
 func _on_new_game_pressed():
 	MenuChanger.change_scene("res://scenes/levels/Scene1.tscn")
 
