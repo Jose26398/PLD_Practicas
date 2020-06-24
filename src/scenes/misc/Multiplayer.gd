@@ -37,7 +37,7 @@ func _on_join_pressed():
 
 	var player_name = get_node("connect/name").text
 	Network.join_game(ip, player_name)
-	# refresh_lobby() gets called by the player_list_changed signal
+	refresh_lobby()
 
 func _on_connection_success():
 	get_node("connect").hide()
@@ -57,7 +57,7 @@ func _on_game_ended():
 func _on_game_error(errtxt):
 	#get_node("error").dialog_text = errtxt
 	#get_node("error").popup_centered_minsize()
-	print("errorrrrr")
+	print("error")
 	return
 
 func refresh_lobby():

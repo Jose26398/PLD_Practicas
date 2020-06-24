@@ -36,7 +36,6 @@ default_bus_layout=""
 
 [autoload]
 
-PlayerStats="*res://scenes/characters/PlayerStats.tscn"
 SceneChanger="*res://effects/SceneChanger.tscn"
 MenuChanger="*res://effects/MenuChanger.tscn"
 Network="*res://config/Network.gd"

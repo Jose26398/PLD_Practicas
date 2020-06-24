@@ -17,7 +17,7 @@ func set_max_hearts(value):
 		lifeBar.max_value = value
 
 func _ready():
-	self.max_hearts = PlayerStats.max_health
-	self.hearts = PlayerStats.health
-	PlayerStats.connect("health_changed", self, "set_hearts")
-	PlayerStats.connect("max_health_changed", self, "set_max_hearts")
+	self.max_hearts = get_parent().get_node("PlayerStats").max_health
+	self.hearts = get_parent().get_node("PlayerStats").health
+	get_parent().get_node("PlayerStats").connect("health_changed", self, "set_hearts")
+	get_parent().get_node("PlayerStats").connect("max_health_changed", self, "set_max_hearts")

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/misc/to_inside.gd" type="Script" id=1]
 [ext_resource path="res://scenes/levels/Inside.tres" type="TileSet" id=2]
 [ext_resource path="res://textures/lights/light.png" type="Texture" id=3]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/misc/Pause.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/ui/Lifebar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -70,7 +69,6 @@ zoom = Vector2( 1.5, 1.5 )
 
 [node name="Player" parent="YSort/players" instance=ExtResource( 7 )]
 position = Vector2( 118.993, 436.152 )
-scale = Vector2( 4, 4 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/players/Player"]
 remote_path = NodePath("../../../../Camera2D")
@@ -94,10 +92,6 @@ scale = Vector2( 4, 4 )
 [node name="Enemy2" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 2094.94, 342.973 )
 scale = Vector2( 4, 4 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Lifebar" parent="CanvasLayer" instance=ExtResource( 6 )]
 
 [node name="spawnpoints" type="Node2D" parent="."]
 

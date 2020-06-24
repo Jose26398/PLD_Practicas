@@ -17,6 +17,7 @@ func _unhandled_input(event):
 		self.paused = not paused
 		scene_tree.set_input_as_handled()
 
+
 func _on_Resume_pressed():
 	self.paused = not paused
 	scene_tree.set_input_as_handled()
@@ -25,15 +26,28 @@ func _on_Resume_pressed():
 func _on_Save_pressed():
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(get_tree().get_current_scene())
-	ResourceSaver.save("res://savegame.tscn", packed_scene)
-
+	ResourceSaver.save("res://config/savegame.tscn", packed_scene)
+	
+	var stats = get_tree().get_current_scene().get_node("YSort/players/Player/PlayerStats")
+	
+	var save_game = File.new()
+	save_game.open("res://config/savestats.save", File.WRITE)
+	var health = {"health" : stats.health}
+	var position = {"pos_x" : stats.get_parent().position.x,
+					"pos_y" : stats.get_parent().position.y}
+	save_game.store_line(to_json(health))
+	save_game.store_line(to_json(position))
+	save_game.close()
 
 func _on_Load_pressed():
 	self.paused = not paused
 	scene_tree.set_input_as_handled()
-	get_tree().change_scene("res://savegame.tscn")
+	SceneChanger.change_scene("res://config/savegame.tscn")
+	MenuChanger.loadgame = true
 
 
 func _on_Quit_pressed():
 	MenuChanger.change_scene("res://scenes/misc/Menu.tscn")
 	self.paused = not paused
+	if get_tree().is_network_server():
+		Network.end_game()

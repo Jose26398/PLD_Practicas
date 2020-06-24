@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/levels/Inside.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/ui/Lifebar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://textures/lights/light.png" type="Texture" id=5]
 [ext_resource path="res://scenes/misc/Pause.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/misc/to_inside.gd" type="Script" id=7]
@@ -55,7 +54,7 @@ color = Color( 0.94902, 0.631373, 0.0823529, 1 )
 shadow_enabled = true
 
 [node name="Light2D10" type="Light2D" parent="Lights"]
-position = Vector2( 1727.35, 1075.41 )
+position = Vector2( 1715.66, 1075.41 )
 texture = ExtResource( 5 )
 color = Color( 0.94902, 0.631373, 0.0823529, 1 )
 shadow_enabled = true
@@ -102,12 +101,13 @@ zoom = Vector2( 1.5, 1.5 )
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 1407.64, 1574.04 )
-scale = Vector2( 4, 4 )
+[node name="players" type="Node2D" parent="YSort"]
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-remote_path = NodePath("../../../Camera2D")
+[node name="Player" parent="YSort/players" instance=ExtResource( 2 )]
+position = Vector2( 1407.64, 1574.04 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/players/Player"]
+remote_path = NodePath("../../../../Camera2D")
 
 [node name="Scene1" type="Area2D" parent="YSort"]
 script = ExtResource( 7 )
@@ -132,9 +132,3 @@ scale = Vector2( 4, 4 )
 [node name="Enemy3" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 1823.5, 341.782 )
 scale = Vector2( 4, 4 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." groups=[
-"Persist",
-]]
-
-[node name="Lifebar" parent="CanvasLayer" instance=ExtResource( 4 )]

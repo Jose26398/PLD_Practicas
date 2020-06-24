@@ -2,12 +2,10 @@ extends Node
 
 export(int) var max_health = 100 setget set_max_health
 var health = max_health setget set_health
-var spawnpoint = null setget set_spawnpoint
 
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
-signal spawnpoint_changed(value)
 
 
 func set_max_health(value):
@@ -23,11 +21,6 @@ func set_health(value):
 		emit_signal("no_health")
 
 
-func set_spawnpoint(value):
-	spawnpoint = value
-	emit_signal("spawnpoint_changed", spawnpoint)
-
-
-func _ready():	
+func _ready():
 	self.health = max_health
 	

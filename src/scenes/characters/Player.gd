@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 class_name Player
 
+const EnemyDeathEffect = preload("res://effects/EnemyDeathEffect.tscn")
+
 const ACCELERATION = 4000
 const MAX_SPEED = 600
 const ATTACK_SPEED = 500
@@ -17,9 +19,9 @@ enum {
 var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.LEFT
-var stats = PlayerStats
 var nickname = ""
 
+onready var stats = $PlayerStats
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
@@ -30,8 +32,25 @@ func _ready():
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
-	if not stats.spawnpoint == null:
-		position = stats.spawnpoint
+	
+	if MenuChanger.loadgame:
+		var savestats = File.new()
+		savestats.open("res://config/savestats.save", File.READ)
+		var health = parse_json(savestats.get_line()).values()[0]
+		var posicion = parse_json(savestats.get_line())
+		
+		stats.set_health( health )
+		position = Vector2(posicion["pos_x"], posicion["pos_y"])
+		savestats.close()
+		
+		MenuChanger.loadgame = false
+	
+	else:
+		if not SceneChanger.health == 0:
+			stats.set_health(SceneChanger.health)
+		
+		if not SceneChanger.spawnpoint == null:
+			position = SceneChanger.spawnpoint
 
 func _physics_process(delta):
 	match state:
@@ -117,3 +136,10 @@ func _on_Hurtbox_area_entered(area):
 
 func set_player_name(new_name):
 	get_node("Label").set_text(new_name)
+
+
+func _on_PlayerStats_no_health():
+	queue_free()
+	var enemyDeathEffect = EnemyDeathEffect.instance()
+	get_parent().add_child(enemyDeathEffect)
+	enemyDeathEffect.global_position = global_position
