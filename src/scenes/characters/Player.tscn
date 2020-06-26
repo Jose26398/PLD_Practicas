@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://textures/characters/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://scenes/characters/Player.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/characters/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://fonts/font-regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://scenes/ui/Lifebar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fonts/arial.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://fonts/tittles.tres" type="DynamicFont" id=9]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -5.80902, 13.2572, -2.60513, 14.0404, 3.30429, 13.4708, 4.72827, 13.3996, 5.44025, 11.5485, 5.01306, 9.12778, 3.37549, 8.62938, 0.242798, 8.0598, -3.24591, 8.48698, -6.02261, 9.41257, -6.3786, 11.5485 )
@@ -649,6 +651,10 @@ size = 8
 outline_color = Color( 0.0392157, 0.0352941, 0.0352941, 1 )
 font_data = ExtResource( 6 )
 
+[sub_resource type="DynamicFont" id=52]
+size = 40
+font_data = ExtResource( 8 )
+
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 4, 4 )
 collision_layer = 2
@@ -742,7 +748,52 @@ margin_top = -16.3233
 margin_right = 42.806
 margin_bottom = 7.67672
 rect_scale = Vector2( 0.1, 0.1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 1.5, 1.5 )
+
+[node name="DeadLayer" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="ColorRect" type="ColorRect" parent="DeadLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.376471 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="DeadLayer/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -408.54
+margin_top = -261.027
+margin_right = 382.46
+margin_bottom = 108.973
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0509804, 0.0156863, 0.0313726, 1 )
+text = "WASTED"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="DeadLayer/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -236.433
+margin_top = 146.0
+margin_right = 255.567
+margin_bottom = 303.0
+custom_fonts/font = SubResource( 52 )
+custom_colors/font_color = Color( 0.615686, 0.133333, 0.517647, 1 )
+text = "[Press pause to load or exit]"
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="PlayerStats" to="." method="_no_health"]
 
 [editable path="Position2D/SwordHitbox"]
 

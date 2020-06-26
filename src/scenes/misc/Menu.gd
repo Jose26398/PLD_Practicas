@@ -10,7 +10,7 @@ func _on_multiplayer_pressed():
 
 
 func _on_options_pressed() -> void:
-	MenuChanger.change_scene("res://scenes/misc/Controls.tscn")
+	get_tree().change_scene("res://scenes/misc/Controls.tscn")
 
 
 func _on_exit_pressed() -> void:

@@ -22,7 +22,6 @@ animations = [ {
 } ]
 
 [node name="AnimatedSprite" type="AnimatedSprite"]
-scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
 animation = "Animate"
 script = ExtResource( 2 )

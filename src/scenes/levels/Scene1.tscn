@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/misc/Pause.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=7]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1.68201, 1.80399 )
 
 [node name="Scene1" type="Node2D"]
@@ -57,12 +57,6 @@ shadow_enabled = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.619608, 0.619608, 0.619608, 1 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 118.993, 436.152 )
-scale = Vector2( 4, 4 )
-current = true
-zoom = Vector2( 1.5, 1.5 )
-
 [node name="YSort" type="YSort" parent="."]
 
 [node name="players" type="Node2D" parent="YSort"]
@@ -80,7 +74,7 @@ target_scene = "res://scenes/levels/Scene2.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Scene2"]
 position = Vector2( 1152.5, -191.353 )
 scale = Vector2( 25, 25 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="DoorSpawn" type="Position2D" parent="YSort/Scene2"]
 position = Vector2( 1400, 1570 )

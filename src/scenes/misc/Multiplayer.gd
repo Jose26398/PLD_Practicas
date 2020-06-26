@@ -10,12 +10,12 @@ func _ready():
 
 func _on_host_pressed():
 	if get_node("connect/name").text == "":
-		##############get_node("connect/error_label").text = "Invalid name!"
+		get_node("connect/error_label").text = "Invalid name!"
 		return
 
 	get_node("connect").hide()
 	get_node("players").show()
-	###########get_node("connect/error_label").text = ""
+	get_node("connect/error_label").text = ""
 
 	var player_name = get_node("connect/name").text
 	Network.host_game(player_name)
@@ -23,15 +23,15 @@ func _on_host_pressed():
 
 func _on_join_pressed():
 	if get_node("connect/name").text == "":
-		print("Invalid name!")
+		get_node("connect/error_label").text = "Invalid name!"
 		return
 
 	var ip = get_node("connect/ip").text
 	if not ip.is_valid_ip_address():
-		print("Invalid IPv4 address!")
+		get_node("connect/error_label").text = "Invalid IPv4 address!"
 		return
 
-	#################get_node("connect/error_label").text=""
+	get_node("connect/error_label").text=""
 	get_node("connect/hBox/host").disabled = true
 	get_node("connect/hBox/join").disabled = true
 
@@ -46,18 +46,17 @@ func _on_connection_success():
 func _on_connection_failed():
 	get_node("connect/host").disabled = false
 	get_node("connect/join").disabled = false
-	##############get_node("connect/error_label").set_text("Connection failed.")
+	get_node("connect/error_label").set_text("Connection failed.")
 
 func _on_game_ended():
-	show()
+	MenuChanger.change_scene("res://scenes/misc/Menu.tscn")
 	get_node("connect").show()
 	get_node("players").hide()
 	get_node("connect/host").disabled = false
 
 func _on_game_error(errtxt):
-	#get_node("error").dialog_text = errtxt
-	#get_node("error").popup_centered_minsize()
-	print("error")
+	get_node("error").dialog_text = errtxt
+	get_node("error").popup_centered_minsize()
 	return
 
 func refresh_lobby():

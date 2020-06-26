@@ -82,7 +82,7 @@ align = 1
 [node name="name" type="LineEdit" parent="connect"]
 margin_top = 72.0
 margin_right = 608.0
-margin_bottom = 117.0
+margin_bottom = 109.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/normal = SubResource( 2 )
@@ -93,9 +93,9 @@ text = "PLAYER1"
 align = 1
 
 [node name="ip_label" type="Label" parent="connect"]
-margin_top = 137.0
+margin_top = 129.0
 margin_right = 608.0
-margin_bottom = 189.0
+margin_bottom = 181.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "IP"
@@ -103,9 +103,9 @@ align = 1
 valign = 1
 
 [node name="ip" type="LineEdit" parent="connect"]
-margin_top = 209.0
+margin_top = 201.0
 margin_right = 608.0
-margin_bottom = 254.0
+margin_bottom = 238.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/normal = SubResource( 2 )
@@ -116,9 +116,9 @@ text = "127.0.0.1"
 align = 1
 
 [node name="hBox" type="HBoxContainer" parent="connect"]
-margin_top = 274.0
+margin_top = 258.0
 margin_right = 608.0
-margin_bottom = 326.0
+margin_bottom = 310.0
 alignment = 1
 
 [node name="host" type="Button" parent="connect/hBox"]
@@ -159,9 +159,9 @@ __meta__ = {
 }
 
 [node name="back" type="Button" parent="connect"]
-margin_top = 346.0
+margin_top = 330.0
 margin_right = 608.0
-margin_bottom = 398.0
+margin_bottom = 382.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 4 )
@@ -175,6 +175,11 @@ text = "BACK"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="error_label" type="Label" parent="connect"]
+margin_top = 402.0
+margin_right = 608.0
+margin_bottom = 416.0
 
 [node name="players" type="VBoxContainer" parent="."]
 visible = false
@@ -250,6 +255,11 @@ text = "BACK"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="error" type="AcceptDialog" parent="."]
+margin_right = 94.0
+margin_bottom = 58.0
+window_title = "¡Alerta!"
 [connection signal="pressed" from="connect/hBox/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="connect/hBox/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="connect/back" to="." method="_on_back_pressed"]

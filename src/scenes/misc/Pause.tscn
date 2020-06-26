@@ -1,16 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://fonts/adrip1.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/tittles.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/font-bold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/misc/Pause.gd" type="Script" id=3]
-
-[sub_resource type="DynamicFont" id=1]
-size = 300
-outline_size = 2
-outline_color = Color( 0.823529, 0.211765, 0.92549, 1 )
-use_filter = true
-extra_spacing_char = 9
-font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.882353 )
@@ -56,7 +48,7 @@ margin_left = -667.0
 margin_top = 15.0
 margin_right = 669.0
 margin_bottom = 310.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "PAUSED"
 align = 1

@@ -2,7 +2,9 @@ extends KinematicBody2D
 
 class_name Player
 
-const EnemyDeathEffect = preload("res://effects/EnemyDeathEffect.tscn")
+puppet var puppet_pos = Vector2()
+puppet var puppet_motion = Vector2()
+puppet var puppet_anim
 
 const ACCELERATION = 4000
 const MAX_SPEED = 600
@@ -19,7 +21,6 @@ enum {
 var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.LEFT
-var nickname = ""
 
 onready var stats = $PlayerStats
 onready var animationPlayer = $AnimationPlayer
@@ -27,15 +28,17 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $Position2D/SwordHitbox
 onready var hurtbox = $Hurtbox
+onready var camera = $Camera2D
+onready var pause_overlay: ColorRect = get_node("DeadLayer/ColorRect")
+
 
 func _ready():
-	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 	
 	if MenuChanger.loadgame:
 		var savestats = File.new()
-		savestats.open("res://config/savestats.save", File.READ)
+		savestats.open("user://savestats.save", File.READ)
 		var health = parse_json(savestats.get_line()).values()[0]
 		var posicion = parse_json(savestats.get_line())
 		
@@ -51,6 +54,12 @@ func _ready():
 		
 		if not SceneChanger.spawnpoint == null:
 			position = SceneChanger.spawnpoint
+			
+	if is_network_master():
+		camera.make_current()
+		
+	puppet_pos = position
+
 
 func _physics_process(delta):
 	match state:
@@ -62,13 +71,23 @@ func _physics_process(delta):
 		
 		ATTACK:
 			attack_state(delta)
-	
+
+
 func move_state(delta):
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input_vector = input_vector.normalized()
-	
+	if is_network_master():
+		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		input_vector = input_vector.normalized()
+		
+		rset_unreliable("puppet_pos", position)
+		rset("puppet_motion", input_vector)
+		move()
+	else:
+		position = puppet_pos
+		input_vector = puppet_motion
+		move()
+		
 	if input_vector != Vector2.ZERO:
 		roll_vector = input_vector
 		swordHitbox.knockback_vector = input_vector
@@ -84,7 +103,11 @@ func move_state(delta):
 		apply_friction(ACCELERATION * delta)
 		velocity = velocity.move_toward(Vector2.ZERO,  delta)
 	
-	move()
+	
+	# puppet
+	if !is_network_master():
+		position = puppet_pos
+		
 	
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
@@ -92,26 +115,33 @@ func move_state(delta):
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
 
-func roll_state(delta):
-	velocity = roll_vector * ROLL_SPEED
-	animationState.travel("Roll")
+
+sync func roll_state(delta):
+	if is_network_master():
+		velocity = roll_vector * ROLL_SPEED
+		animationState.travel("Roll")
 	move()
 
-func attack_state(delta):
+
+sync func attack_state(delta):
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input_vector = input_vector.normalized()
-	velocity = velocity.move_toward(input_vector * ATTACK_SPEED, delta)
+	if is_network_master():
+		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		input_vector = input_vector.normalized()
+		velocity = velocity.move_toward(input_vector * ATTACK_SPEED, delta)
+		animationState.travel("Attack")
 	move()
-	animationState.travel("Attack")
+
 
 func move():
 	velocity = move_and_slide(velocity)
 
+
 func roll_animation_finished():
 	velocity = velocity * 0.8
 	state = MOVE
+
 
 func attack_animation_finished():
 	state = MOVE
@@ -129,17 +159,21 @@ func apply_movement(acceleration):
 	velocity = velocity.clamped(MAX_SPEED)
 
 
-func _on_Hurtbox_area_entered(area):
+sync func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 	stats.health -= area.damage
+
 
 func set_player_name(new_name):
 	get_node("Label").set_text(new_name)
 
 
-func _on_PlayerStats_no_health():
-	queue_free()
-	var enemyDeathEffect = EnemyDeathEffect.instance()
-	get_parent().add_child(enemyDeathEffect)
-	enemyDeathEffect.global_position = global_position
+sync func _no_health():
+	if is_network_master():
+		hide()
+		set_physics_process(false)
+		set_process(false)
+		pause_overlay.visible = true
+	else:
+		rpc("no_health")
