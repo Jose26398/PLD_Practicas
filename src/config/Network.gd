@@ -63,9 +63,8 @@ func unregister_player(id):
 
 remote func pre_start_game(spawn_points):
 	# Change scene
-	var world = load("res://scenes/levels/Scene1.tscn").instance()
+	var world = load("res://scenes/levels/SMP.tscn").instance()
 	get_tree().get_root().add_child(world)
-	get_tree().get_root().get_node("Scene1/YSort/players/Player").queue_free()
 	get_tree().get_root().get_node("Multiplayer").queue_free()
 
 	var player_scene = load("res://scenes/characters/Player.tscn")
@@ -144,9 +143,9 @@ func begin_game():
 	pre_start_game(spawn_points)
 
 func end_game():
-	if has_node("/root/Scene1"): # Game is in progress
+	if has_node("/root/SMP"): # Game is in progress
 		# End it
-		get_node("/root/Scene1").queue_free()
+		get_node("/root/SMP").queue_free()
 
 	emit_signal("game_ended")
 	players.clear()

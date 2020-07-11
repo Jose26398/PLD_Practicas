@@ -13,9 +13,6 @@ func set_paused(value: bool) -> void:
 	paused = value
 	scene_tree.paused = value
 	pause_overlay.visible = value
-	if not get_node("/root/Scene1/YSort/players").has_node("Player"):
-		save_button.disabled = true
-		load_button.disabled = true
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("Pause"):

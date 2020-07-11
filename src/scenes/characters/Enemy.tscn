@@ -207,14 +207,13 @@ radius = 5.51515
 height = 8.07689
 
 [sub_resource type="CircleShape2D" id=26]
-radius = 101.422
+radius = 83.5459
 
 [sub_resource type="CapsuleShape2D" id=27]
 radius = 2.04923
 height = 11.3477
 
 [node name="Enemy" type="KinematicBody2D"]
-position = Vector2( 500, 250 )
 scale = Vector2( 2, 2 )
 collision_layer = 16
 script = ExtResource( 2 )
@@ -265,7 +264,6 @@ shape = SubResource( 25 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 1, 1, 0.219608 )
-position = Vector2( -0.92395, -1.44193 )
 shape = SubResource( 26 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]

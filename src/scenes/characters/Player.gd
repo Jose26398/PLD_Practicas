@@ -4,7 +4,7 @@ class_name Player
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
-puppet var puppet_anim
+puppet var puppet_anim = MOVE
 
 const ACCELERATION = 4000
 const MAX_SPEED = 600
@@ -29,7 +29,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $Position2D/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var camera = $Camera2D
-onready var pause_overlay: ColorRect = get_node("DeadLayer/ColorRect")
+onready var dead_overlay: ColorRect = get_node("DeadLayer/ColorRect")
 
 
 func _ready():
@@ -81,13 +81,13 @@ func move_state(delta):
 		input_vector = input_vector.normalized()
 		
 		rset_unreliable("puppet_pos", position)
-		rset("puppet_motion", input_vector)
-		move()
+		rset_unreliable("puppet_motion", input_vector)
+		rset_unreliable("puppet_anim", MOVE)
 	else:
 		position = puppet_pos
 		input_vector = puppet_motion
-		move()
-		
+	move()
+	
 	if input_vector != Vector2.ZERO:
 		roll_vector = input_vector
 		swordHitbox.knockback_vector = input_vector
@@ -104,10 +104,20 @@ func move_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO,  delta)
 	
 	
+	if not is_network_master() and puppet_anim == MOVE:
+		if puppet_motion != Vector2.ZERO:
+			animationState.travel("Run")
+		else:
+			animationState.travel("Idle")
+	if not is_network_master() and puppet_anim == ROLL:
+		animationState.travel("Roll")
+	if not is_network_master() and puppet_anim == ATTACK:
+		animationState.travel("Attack")
+	
+	
 	# puppet
 	if !is_network_master():
 		position = puppet_pos
-		
 	
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
@@ -116,21 +126,35 @@ func move_state(delta):
 		state = ATTACK
 
 
-sync func roll_state(delta):
+func roll_state(delta):
 	if is_network_master():
 		velocity = roll_vector * ROLL_SPEED
+		rset_unreliable("puppet_pos", position)
+		rset_unreliable("puppet_motion", velocity)
+		rset_unreliable("puppet_anim", ROLL)
 		animationState.travel("Roll")
+	else:
+		position = puppet_pos
+		velocity = puppet_motion
+		state = puppet_anim
 	move()
 
 
-sync func attack_state(delta):
+func attack_state(delta):
 	var input_vector = Vector2.ZERO
 	if is_network_master():
 		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 		input_vector = input_vector.normalized()
 		velocity = velocity.move_toward(input_vector * ATTACK_SPEED, delta)
+		rset_unreliable("puppet_pos", position)
+		rset_unreliable("puppet_motion", input_vector)
+		rset_unreliable("puppet_anim", ATTACK)
 		animationState.travel("Attack")
+	else:
+		position = puppet_pos
+		velocity = puppet_motion
+		state = puppet_anim
 	move()
 
 
@@ -141,10 +165,14 @@ func move():
 func roll_animation_finished():
 	velocity = velocity * 0.8
 	state = MOVE
+	if is_network_master():
+		rset_unreliable("puppet_anim", MOVE)
 
 
 func attack_animation_finished():
 	state = MOVE
+	if is_network_master():
+		rset_unreliable("puppet_anim", MOVE)
 
 
 func apply_friction(amount):
@@ -174,6 +202,7 @@ sync func _no_health():
 		hide()
 		set_physics_process(false)
 		set_process(false)
-		pause_overlay.visible = true
+		dead_overlay.visible = true
+		queue_free()
 	else:
-		rpc("no_health")
+		rpc_id(get_instance_id(), "no_health")
