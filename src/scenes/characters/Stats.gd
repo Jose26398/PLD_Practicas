@@ -22,8 +22,5 @@ func set_health(value):
 	health = value
 	emit_signal("health_changed", health)
 	if health <= 0:
-		if is_network_master():
-			emit_signal("no_health")
-		else:
-			rpc("no_health")
+		emit_signal("no_health")
 	

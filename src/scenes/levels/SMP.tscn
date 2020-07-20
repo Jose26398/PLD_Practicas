@@ -12,7 +12,6 @@
 layer = 100
 
 [node name="Pause" parent="PauseLayer" instance=ExtResource( 5 )]
-visible = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

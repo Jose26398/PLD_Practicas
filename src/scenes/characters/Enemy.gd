@@ -27,6 +27,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtbox = $Hurtbox
+onready var softCollision = $SoftCollision
 
 func _ready():
 	animationTree.active = true
@@ -59,7 +60,8 @@ func _physics_process(delta):
 				velocity = velocity.move_toward(Vector2.ZERO,  delta)
 				state = IDLE
 			
-		
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 4000
 	velocity = move_and_slide(velocity)
 
 

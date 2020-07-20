@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://textures/characters/Guard.png" type="Texture" id=1]
 [ext_resource path="res://scenes/characters/Enemy.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/characters/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/characters/PlayerDetectionZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://hitboxes/Hitbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hitboxes/SoftCollision.tscn" type="PackedScene" id=7]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -5.61176, 12.3838, -1.83438, 13.6429, 3.00839, 13.2555, 5.6235, 11.7058, 5.52664, 9.57495, 2.42728, 8.89696, -2.41551, 9.09067, -5.22433, 9.38124, -6.48346, 10.7372 )
@@ -213,6 +214,9 @@ radius = 33.6185
 radius = 2.04923
 height = 11.3477
 
+[sub_resource type="CircleShape2D" id=28]
+radius = 8.57412
+
 [node name="Guard" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
 collision_layer = 16
@@ -276,6 +280,12 @@ damage = 10
 position = Vector2( -0.526062, 6.50894 )
 scale = Vector2( 2, 1 )
 shape = SubResource( 27 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 7 )]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( -0.463516, 9.2703 )
+shape = SubResource( 28 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_no_health"]
 
@@ -284,3 +294,5 @@ shape = SubResource( 27 )
 [editable path="PlayerDetectionZone"]
 
 [editable path="Hitbox"]
+
+[editable path="SoftCollision"]

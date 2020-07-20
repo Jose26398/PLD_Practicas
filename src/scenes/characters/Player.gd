@@ -187,7 +187,7 @@ func apply_movement(acceleration):
 	velocity = velocity.clamped(MAX_SPEED)
 
 
-sync func _on_Hurtbox_area_entered(area):
+func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 	stats.health -= area.damage
@@ -198,11 +198,9 @@ func set_player_name(new_name):
 
 
 sync func _no_health():
+	hide()
+	set_physics_process(false)
+	set_process(false)
+	$CollisionShape2D.visible = false
 	if is_network_master():
-		hide()
-		set_physics_process(false)
-		set_process(false)
 		dead_overlay.visible = true
-		queue_free()
-	else:
-		rpc_id(get_instance_id(), "no_health")
