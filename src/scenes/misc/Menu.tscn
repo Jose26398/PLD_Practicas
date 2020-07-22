@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://textures/menu/Menu.png" type="Texture" id=1]
 [ext_resource path="res://scenes/misc/Menu.gd" type="Script" id=2]
 [ext_resource path="res://fonts/buttons.tres" type="DynamicFont" id=3]
+[ext_resource path="res://sounds/click.ogg" type="AudioStream" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.156863 )
@@ -124,6 +125,9 @@ text = "EXIT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="clickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="pressed" from="menu/singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="menu/multiplayer" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="menu/options" to="." method="_on_options_pressed"]

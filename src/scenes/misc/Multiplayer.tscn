@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://textures/menu/Menu.png" type="Texture" id=1]
 [ext_resource path="res://scenes/misc/Multiplayer.gd" type="Script" id=2]
 [ext_resource path="res://fonts/buttons.tres" type="DynamicFont" id=3]
 [ext_resource path="res://fonts/font-bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://sounds/click.wav" type="AudioStream" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -260,6 +261,9 @@ __meta__ = {
 margin_right = 94.0
 margin_bottom = 58.0
 window_title = "¡Alerta!"
+
+[node name="clickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 [connection signal="pressed" from="connect/hBox/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="connect/hBox/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="connect/back" to="." method="_on_back_pressed"]

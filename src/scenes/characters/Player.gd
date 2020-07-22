@@ -35,6 +35,8 @@ onready var dead_overlay: ColorRect = get_node("DeadLayer/ColorRect")
 func _ready():
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
+	AudioPlayer.get_node("intro").stop()
+	get_node("soundtrack").play()
 	
 	if MenuChanger.loadgame:
 		var savestats = File.new()
@@ -127,6 +129,7 @@ func move_state(delta):
 
 
 func roll_state(delta):
+	$Hurtbox/CollisionShape2D.disabled = true
 	if is_network_master():
 		velocity = roll_vector * ROLL_SPEED
 		rset_unreliable("puppet_pos", position)
@@ -163,6 +166,7 @@ func move():
 
 
 func roll_animation_finished():
+	$Hurtbox/CollisionShape2D.disabled = false
 	velocity = velocity * 0.8
 	state = MOVE
 	if is_network_master():
@@ -188,6 +192,7 @@ func apply_movement(acceleration):
 
 
 func _on_Hurtbox_area_entered(area):
+	$enemyAttack.play()
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 	stats.health -= area.damage

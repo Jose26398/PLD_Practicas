@@ -21,11 +21,13 @@ func _unhandled_input(event):
 
 
 func _on_Resume_pressed():
+	$clickSound.play()
 	self.paused = not paused
 	scene_tree.set_input_as_handled()
 
 
 func _on_Save_pressed():
+	$clickSound.play()
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(get_tree().get_current_scene())
 	ResourceSaver.save("user://savegame.tscn", packed_scene)
@@ -43,6 +45,7 @@ func _on_Save_pressed():
 
 
 func _on_Load_pressed():
+	$clickSound.play()
 	self.paused = not paused
 	scene_tree.set_input_as_handled()
 	SceneChanger.change_scene("user://savegame.tscn")
@@ -50,6 +53,7 @@ func _on_Load_pressed():
 
 
 func _on_Quit_pressed():
+	$clickSound.play()
 	MenuChanger.change_scene("res://scenes/misc/Menu.tscn")
 	self.paused = not paused
 	Network.end_game()

@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="PLD_Practicas"
-run/main_scene="res://scenes/misc/Menu.tscn"
+run/main_scene="res://effects/Intro.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -39,6 +39,7 @@ default_bus_layout=""
 SceneChanger="*res://effects/SceneChanger.tscn"
 MenuChanger="*res://effects/MenuChanger.tscn"
 Network="*res://config/Network.gd"
+AudioPlayer="*res://config/AudioPlayer.tscn"
 
 [display]
 

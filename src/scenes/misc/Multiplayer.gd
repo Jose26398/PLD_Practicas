@@ -9,6 +9,7 @@ func _ready():
 	Network.connect("game_error", self, "_on_game_error")
 
 func _on_host_pressed():
+	$clickSound.play()
 	if get_node("connect/name").text == "":
 		get_node("connect/error_label").text = "Invalid name!"
 		return
@@ -22,6 +23,7 @@ func _on_host_pressed():
 	refresh_lobby()
 
 func _on_join_pressed():
+	$clickSound.play()
 	if get_node("connect/name").text == "":
 		get_node("connect/error_label").text = "Invalid name!"
 		return
@@ -71,10 +73,12 @@ func refresh_lobby():
 
 
 func _on_start_pressed():
+	$clickSound.play()
 	Network.begin_game()
 
 
 func _on_back_pressed():
+	$clickSound.play()
 	MenuChanger.change_scene("res://scenes/misc/Menu.tscn")
 
 

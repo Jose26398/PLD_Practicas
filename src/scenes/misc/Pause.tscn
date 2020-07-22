@@ -1,22 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fonts/tittles.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/font-bold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/misc/Pause.gd" type="Script" id=3]
+[ext_resource path="res://sounds/click.wav" type="AudioStream" id=4]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.882353 )
 border_width_left = 5
 border_width_right = 5
 border_color = Color( 0.8, 0.109804, 0.321569, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.196078 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.156863 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 45
 outline_size = 1
 outline_color = Color( 0.8, 0.109804, 0.321569, 1 )
@@ -75,10 +76,10 @@ __meta__ = {
 margin_right = 922.0
 margin_bottom = 84.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 text = "RESUME"
@@ -88,10 +89,10 @@ margin_top = 124.0
 margin_right = 922.0
 margin_bottom = 208.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 text = "SAVE GAME"
@@ -101,10 +102,10 @@ margin_top = 248.0
 margin_right = 922.0
 margin_bottom = 332.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 text = "LOAD GAME"
@@ -114,13 +115,16 @@ margin_top = 372.0
 margin_right = 922.0
 margin_bottom = 459.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 text = "QUIT"
+
+[node name="clickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="pressed" from="ColorRect/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/Load" to="." method="_on_Load_pressed"]
