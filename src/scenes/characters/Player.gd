@@ -36,7 +36,7 @@ func _ready():
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 	AudioPlayer.get_node("intro").stop()
-	get_node("soundtrack").play()
+	get_node("Sounds/soundtrack").play()
 	
 	if MenuChanger.loadgame:
 		var savestats = File.new()
@@ -167,6 +167,7 @@ func move():
 
 func roll_animation_finished():
 	$Hurtbox/CollisionShape2D.disabled = false
+	$Sounds/dashSound.play()
 	velocity = velocity * 0.8
 	state = MOVE
 	if is_network_master():
@@ -192,7 +193,7 @@ func apply_movement(acceleration):
 
 
 func _on_Hurtbox_area_entered(area):
-	$enemyAttack.play()
+	$Sounds/enemyAttack.play()
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 	stats.health -= area.damage
@@ -203,9 +204,10 @@ func set_player_name(new_name):
 
 
 sync func _no_health():
+	$Sounds/deathSound.play()
 	hide()
 	set_physics_process(false)
 	set_process(false)
-	$CollisionShape2D.visible = false
+	remove_child(hurtbox)
 	if is_network_master():
 		dead_overlay.visible = true

@@ -48,7 +48,7 @@ func _physics_process(delta):
 			
 		CHASE:
 			var player = playerDetectionZone.player
-			if player != null:
+			if player != null and player.is_visible():
 				var direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 				animationTree.set("parameters/Idle/blend_position", direction)
@@ -85,7 +85,7 @@ func _on_Hurtbox_area_entered(area):
 
 
 sync func _no_health():
-	print("holaaa")
+	$enemyDeath.play()
 	queue_free()
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
