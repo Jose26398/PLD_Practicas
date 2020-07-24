@@ -3,11 +3,13 @@ extends Control
 
 func _on_singleplayer_pressed():
 	$clickSound.play()
+	MenuChanger.singleplayer = true
 	MenuChanger.change_scene("res://scenes/misc/Singleplayer.tscn")
 
 
 func _on_multiplayer_pressed():
 	$clickSound.play()
+	MenuChanger.singleplayer = false
 	MenuChanger.change_scene("res://scenes/misc/Multiplayer.tscn")
 
 

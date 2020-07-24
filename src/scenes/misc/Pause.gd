@@ -8,7 +8,10 @@ onready var load_button = $ColorRect/VBoxContainer/Load
 
 func _ready():
 	pause_overlay.visible = false
-
+	if not MenuChanger.singleplayer:
+		$ColorRect/VBoxContainer/Save.disabled = true
+		$ColorRect/VBoxContainer/Load.disabled = true
+	
 func set_paused(value: bool) -> void:
 	paused = value
 	scene_tree.paused = value

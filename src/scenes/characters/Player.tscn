@@ -64,7 +64,7 @@ tracks/2/keys = {
 "times": PoolRealArray( -0.05 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 90.0 ]
+"values": [ 120.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../Position2D/SwordHitbox/CollisionShape2D:disabled")
@@ -88,7 +88,7 @@ tracks/4/keys = {
 "times": PoolRealArray( -0.05 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -5 ) ]
+"values": [ Vector2( 10, -4 ) ]
 }
 tracks/5/type = "audio"
 tracks/5/path = NodePath("../Sounds/attackSound")
@@ -146,7 +146,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 180.0 ]
+"values": [ 150.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../Position2D/SwordHitbox/CollisionShape2D:disabled")
@@ -173,6 +173,18 @@ tracks/4/keys = {
 "stream": ExtResource( 10 )
 } ],
 "times": PoolRealArray( 0.02 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Position2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -216,7 +228,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ 30.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../Position2D/SwordHitbox/CollisionShape2D:disabled")
@@ -243,6 +255,18 @@ tracks/4/keys = {
 "stream": ExtResource( 10 )
 } ],
 "times": PoolRealArray( 0.02 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Position2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -10 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -286,7 +310,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 270.0 ]
+"values": [ 300.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../Position2D/SwordHitbox/CollisionShape2D:disabled")
@@ -310,7 +334,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ Vector2( -7, 2 ) ]
 }
 tracks/5/type = "audio"
 tracks/5/path = NodePath("../Sounds/attackSound")
@@ -700,13 +724,13 @@ graph_offset = Vector2( -1, -53.0681 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=48]
 
-[sub_resource type="CapsuleShape2D" id=49]
-radius = 9.52887
-height = 14.1412
+[sub_resource type="CapsuleShape2D" id=53]
+radius = 5.0
+height = 17.8595
 
-[sub_resource type="CapsuleShape2D" id=50]
-radius = 5.25162
-height = 4.70282
+[sub_resource type="CapsuleShape2D" id=54]
+radius = 5.45718
+height = 6.79883
 
 [sub_resource type="DynamicFont" id=51]
 size = 8
@@ -725,7 +749,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 60
-frame = 6
+frame = 32
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 occluder = SubResource( 1 )
@@ -766,7 +790,8 @@ parameters/Roll/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0.00944674, -0.456897 )
 
 [node name="Position2D" type="Position2D" parent="."]
-rotation = 4.71239
+position = Vector2( 0, -8 )
+rotation = 2.61799
 __meta__ = {
 "_gizmo_extents_": 8.0
 }
@@ -778,15 +803,16 @@ script = ExtResource( 4 )
 damage = 25
 
 [node name="CollisionShape2D" parent="Position2D/SwordHitbox" index="0"]
-shape = SubResource( 49 )
+position = Vector2( 5.53349, 1.16747 )
+shape = SubResource( 53 )
 disabled = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( -0.332184, 5.2316 )
-shape = SubResource( 50 )
+position = Vector2( -0.457184, 3.8566 )
+shape = SubResource( 54 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -15.8405

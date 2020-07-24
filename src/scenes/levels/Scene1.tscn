@@ -11,20 +11,20 @@
 [ext_resource path="res://scenes/ui/DialogActivator.gd" type="Script" id=9]
 [ext_resource path="res://scenes/items/MedicalKit.tscn" type="PackedScene" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1.68201, 1.80399 )
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1.68201, 1.80399 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 65.7213, 77.795 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 91.1489, 67.2003 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 50, 100 )
 
 [node name="Scene1" type="Node2D"]
@@ -176,18 +176,6 @@ position = Vector2( -571.972, 1610.03 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/players/Player"]
 remote_path = NodePath("../../../../Camera2D")
 
-[node name="Scene2" type="Area2D" parent="YSort"]
-script = ExtResource( 1 )
-target_scene = "res://scenes/levels/Scene2.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Scene2"]
-position = Vector2( 1089.44, -320.099 )
-scale = Vector2( 25, 25 )
-shape = SubResource( 1 )
-
-[node name="DoorSpawn" type="Position2D" parent="YSort/Scene2"]
-position = Vector2( 1400, 1570 )
-
 [node name="enemies" type="Node2D" parent="YSort"]
 
 [node name="Enemy1" parent="YSort/enemies" instance=ExtResource( 4 )]
@@ -195,7 +183,7 @@ position = Vector2( -576.068, 909.334 )
 scale = Vector2( 4, 4 )
 
 [node name="AnimationTree" parent="YSort/enemies/Enemy1" index="3"]
-parameters/playback = SubResource( 2 )
+parameters/playback = SubResource( 1 )
 
 [node name="Stats" parent="YSort/enemies/Enemy1" index="5"]
 max_health = 50
@@ -208,48 +196,60 @@ scale = Vector2( 4, 4 )
 position = Vector2( 1043.74, 339.128 )
 scale = Vector2( 4, 4 )
 
-[node name="Guard" parent="YSort/enemies" instance=ExtResource( 6 )]
-position = Vector2( 40.1316, 570.39 )
-scale = Vector2( 4, 4 )
-
 [node name="Guard2" parent="YSort/enemies" instance=ExtResource( 6 )]
 position = Vector2( 37.2333, 506.033 )
 scale = Vector2( 4, 4 )
 
-[node name="Guard3" parent="YSort/enemies" instance=ExtResource( 6 )]
-position = Vector2( 871.112, 409.877 )
+[node name="Guard" parent="YSort/enemies" instance=ExtResource( 6 )]
+position = Vector2( 40.1316, 570.39 )
 scale = Vector2( 4, 4 )
 
-[node name="AnimationTree" parent="YSort/enemies/Guard3" index="3"]
-parameters/playback = SubResource( 3 )
+[node name="GuardKey" parent="YSort/enemies" instance=ExtResource( 6 )]
+position = Vector2( 891.272, 405.32 )
+scale = Vector2( 4, 4 )
 
-[node name="Stats" parent="YSort/enemies/Guard3" index="5"]
+[node name="AnimationTree" parent="YSort/enemies/GuardKey" index="3"]
+parameters/playback = SubResource( 2 )
+
+[node name="Stats" parent="YSort/enemies/GuardKey" index="5"]
 drop = "card"
+
+[node name="Scene2" type="Area2D" parent="."]
+script = ExtResource( 1 )
+target_scene = "res://scenes/levels/Scene2.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scene2"]
+position = Vector2( 1089.44, -320.099 )
+scale = Vector2( 25, 25 )
+shape = SubResource( 3 )
+
+[node name="DoorSpawn" type="Position2D" parent="Scene2"]
+position = Vector2( 1400, 1570 )
 
 [node name="dialogActivator" type="Area2D" parent="."]
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dialogActivator"]
 position = Vector2( -576.848, 1370.08 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="dialogActivator2" type="Area2D" parent="."]
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dialogActivator2"]
 position = Vector2( -328.934, 575.483 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="dialogActivator3" type="Area2D" parent="."]
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dialogActivator3"]
 position = Vector2( 540.54, 583.483 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 [connection signal="body_entered" from="dialogActivator" to="dialogActivator" method="_on_dialogActivator_body_entered"]
 [connection signal="body_entered" from="dialogActivator2" to="dialogActivator2" method="_on_dialogActivator_body_entered"]
 [connection signal="body_entered" from="dialogActivator3" to="dialogActivator3" method="_on_dialogActivator_body_entered"]
 
 [editable path="YSort/enemies/Enemy1"]
 
-[editable path="YSort/enemies/Guard3"]
+[editable path="YSort/enemies/GuardKey"]

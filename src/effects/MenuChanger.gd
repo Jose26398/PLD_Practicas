@@ -3,6 +3,7 @@ extends CanvasLayer
 signal menu_changed()
 
 var loadgame = false
+var singleplayer = true
 
 onready var animation_player = $AnimationPlayer
 onready var black = $Control/Black

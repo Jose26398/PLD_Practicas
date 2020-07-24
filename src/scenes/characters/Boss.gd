@@ -6,7 +6,7 @@ const Item = preload("res://scenes/items/KeyCard.tscn")
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 
-const ACCELERATION = 2000
+const ACCELERATION = 3000
 const MAX_SPEED = 600
 const FRICTION = 6000
 
@@ -86,7 +86,7 @@ func _on_Hurtbox_area_entered(area):
 
 
 sync func _no_health():
-	queue_free()
+	hide()
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
@@ -96,6 +96,8 @@ sync func _no_health():
 		item.global_position = global_position
 	elif stats.drop == "demo":
 		var end  = get_tree().get_root().get_node("Scene2/EndLayer/End/ColorRect")
+		yield(get_tree().create_timer(1.5), "timeout")
 		end.visible = true
 		get_tree().paused = true
+	queue_free()
 

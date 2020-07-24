@@ -56,9 +56,6 @@ func _ready():
 	else:
 		if not SceneChanger.health == 0:
 			stats.set_health(SceneChanger.health)
-		
-		if not SceneChanger.spawnpoint == null:
-			position = SceneChanger.spawnpoint
 			
 	if is_network_master():
 		camera.make_current()
@@ -108,21 +105,21 @@ func move_state(delta):
 		apply_friction(ACCELERATION * delta)
 		velocity = velocity.move_toward(Vector2.ZERO,  delta)
 	
+	if not MenuChanger.singleplayer:
+		if not is_network_master() and puppet_anim == MOVE:
+			if puppet_motion != Vector2.ZERO:
+				animationState.travel("Run")
+			else:
+				animationState.travel("Idle")
+		if not is_network_master() and puppet_anim == ROLL:
+			animationState.travel("Roll")
+		if not is_network_master() and puppet_anim == ATTACK:
+			animationState.travel("Attack")
 	
-	if not is_network_master() and puppet_anim == MOVE:
-		if puppet_motion != Vector2.ZERO:
-			animationState.travel("Run")
-		else:
-			animationState.travel("Idle")
-	if not is_network_master() and puppet_anim == ROLL:
-		animationState.travel("Roll")
-	if not is_network_master() and puppet_anim == ATTACK:
-		animationState.travel("Attack")
 	
-	
-	# puppet
-	if !is_network_master():
-		position = puppet_pos
+		# puppet
+		if !is_network_master():
+			position = puppet_pos
 	
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
@@ -175,14 +172,16 @@ func roll_animation_finished():
 	$Sounds/dashSound.play()
 	velocity = velocity * 0.8
 	state = MOVE
-	if is_network_master():
-		rset_unreliable("puppet_anim", MOVE)
+	if not MenuChanger.singleplayer:
+		if is_network_master():
+			rset_unreliable("puppet_anim", MOVE)
 
 
 func attack_animation_finished():
 	state = MOVE
-	if is_network_master():
-		rset_unreliable("puppet_anim", MOVE)
+	if not MenuChanger.singleplayer:
+		if is_network_master():
+			rset_unreliable("puppet_anim", MOVE)
 
 
 func apply_friction(amount):

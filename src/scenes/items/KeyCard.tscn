@@ -7,6 +7,7 @@
 extents = Vector2( 32.0203, 24.8357 )
 
 [node name="KeyCard" type="Sprite"]
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 

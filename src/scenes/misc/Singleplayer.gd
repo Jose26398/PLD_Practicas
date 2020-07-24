@@ -4,7 +4,6 @@ extends Control
 func _on_new_game_pressed():
 	$clickSound.play()
 	MenuChanger.loadgame = false
-	SceneChanger.set_spawnpoint(null)
 	SceneChanger.set_health(100)
 	MenuChanger.change_scene("res://scenes/levels/Scene1.tscn")
 

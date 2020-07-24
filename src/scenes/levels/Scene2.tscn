@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/levels/Inside.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -6,13 +6,12 @@
 [ext_resource path="res://scenes/items/MedicalKit.tscn" type="PackedScene" id=4]
 [ext_resource path="res://textures/lights/light.png" type="Texture" id=5]
 [ext_resource path="res://scenes/misc/Pause.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/misc/to_inside.gd" type="Script" id=7]
 [ext_resource path="res://scenes/characters/Guard.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/characters/Boss.tscn" type="PackedScene" id=9]
 [ext_resource path="res://fonts/adrip1.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://fonts/buttons.tres" type="DynamicFont" id=11]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 230
 outline_size = 4
 outline_color = Color( 0.8, 0.109804, 0.321569, 1 )
@@ -20,20 +19,17 @@ extra_spacing_char = 5
 extra_spacing_space = 18
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.882353 )
 border_width_left = 5
 border_width_right = 5
 border_color = Color( 0.8, 0.109804, 0.321569, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.219608 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.498039, 0.203922, 0.847059, 0.156863 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.01228, 1.92619 )
 
 [node name="Scene2" type="Node2D"]
 
@@ -57,7 +53,7 @@ __meta__ = {
 visible = false
 anchor_right = 48.0
 anchor_bottom = 27.0
-color = Color( 0, 0, 0, 0.780392 )
+color = Color( 0.0509804, 0.0117647, 0.109804, 0.937255 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -68,7 +64,7 @@ anchor_right = 0.5
 margin_left = -786.0
 margin_right = 786.0
 margin_bottom = 858.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "LEVEL COMPLETED
 (buy the game
@@ -87,9 +83,9 @@ margin_left = -393.956
 margin_top = -193.079
 margin_right = 396.044
 margin_bottom = -80.0793
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "MAIN MENU"
@@ -224,18 +220,6 @@ position = Vector2( 1407.64, 1574.04 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/players/Player"]
 remote_path = NodePath("../../../../Camera2D")
-
-[node name="Scene1" type="Area2D" parent="YSort"]
-script = ExtResource( 7 )
-target_scene = "res://scenes/levels/Scene1.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Scene1"]
-position = Vector2( 1404.61, 1715.8 )
-scale = Vector2( 25, 25 )
-shape = SubResource( 1 )
-
-[node name="DoorSpawn" type="Position2D" parent="YSort/Scene1"]
-position = Vector2( 1000, -300 )
 
 [node name="enemies" type="Node2D" parent="YSort"]
 
