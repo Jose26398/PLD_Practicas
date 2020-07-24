@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/characters/Guard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/Inside.tres" type="TileSet" id=2]
 [ext_resource path="res://textures/lights/light.png" type="Texture" id=3]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/misc/Pause.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/characters/Boss.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/items/MedicalKit.tscn" type="PackedScene" id=7]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="SMP" type="Node2D"]
 
@@ -116,6 +120,12 @@ color = Color( 0.941176, 0.756863, 0.941176, 1 )
 energy = 0.5
 shadow_enabled = true
 
+[node name="MedicalKit" parent="." instance=ExtResource( 7 )]
+position = Vector2( 2447.42, 184.951 )
+
+[node name="MedicalKit2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1621.42, 1608.95 )
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.619608, 0.619608, 0.619608, 1 )
 
@@ -171,6 +181,16 @@ scale = Vector2( 4, 4 )
 position = Vector2( 1415.57, 396.46 )
 scale = Vector2( 4, 4 )
 
+[node name="Boss" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 541.423, 1396.95 )
+scale = Vector2( 4.5, 4.5 )
+
+[node name="AnimationTree" parent="YSort/Boss" index="3"]
+parameters/playback = SubResource( 1 )
+
+[node name="Stats" parent="YSort/Boss" index="5"]
+drop = ""
+
 [node name="spawnpoints" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="spawnpoints"]
@@ -178,3 +198,5 @@ position = Vector2( 179.393, 299.274 )
 
 [node name="1" type="Position2D" parent="spawnpoints"]
 position = Vector2( 185.825, 572.653 )
+
+[editable path="YSort/Boss"]

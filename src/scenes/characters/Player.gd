@@ -29,6 +29,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $Position2D/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var camera = $Camera2D
+onready var softCollision = $SoftCollision
 onready var dead_overlay: ColorRect = get_node("DeadLayer/ColorRect")
 
 
@@ -43,9 +44,11 @@ func _ready():
 		savestats.open("user://savestats.save", File.READ)
 		var health = parse_json(savestats.get_line()).values()[0]
 		var posicion = parse_json(savestats.get_line())
+		var items = parse_json(savestats.get_line()).values()[0]
 		
 		stats.set_health( health )
 		position = Vector2(posicion["pos_x"], posicion["pos_y"])
+		stats.items = items
 		savestats.close()
 		
 		MenuChanger.loadgame = false
@@ -88,7 +91,7 @@ func move_state(delta):
 	else:
 		position = puppet_pos
 		input_vector = puppet_motion
-	move()
+	move(delta)
 	
 	if input_vector != Vector2.ZERO:
 		roll_vector = input_vector
@@ -140,7 +143,7 @@ func roll_state(delta):
 		position = puppet_pos
 		velocity = puppet_motion
 		state = puppet_anim
-	move()
+	move(delta)
 
 
 func attack_state(delta):
@@ -158,10 +161,12 @@ func attack_state(delta):
 		position = puppet_pos
 		velocity = puppet_motion
 		state = puppet_anim
-	move()
+	move(delta)
 
 
-func move():
+func move(delta):
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 4000
 	velocity = move_and_slide(velocity)
 
 

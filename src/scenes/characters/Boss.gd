@@ -7,8 +7,8 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 
 const ACCELERATION = 2000
-const MAX_SPEED = 200
-const FRICTION = 4000
+const MAX_SPEED = 600
+const FRICTION = 6000
 
 
 enum {
@@ -82,7 +82,7 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 50
 	hurtbox.create_hit_effect()
-	velocity = -velocity*0.5
+	velocity = -velocity*0.75
 
 
 sync func _no_health():
@@ -98,3 +98,4 @@ sync func _no_health():
 		var end  = get_tree().get_root().get_node("Scene2/EndLayer/End/ColorRect")
 		end.visible = true
 		get_tree().paused = true
+

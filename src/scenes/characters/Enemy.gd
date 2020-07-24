@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://effects/EnemyDeathEffect.tscn")
+const Item = preload("res://scenes/items/KeyCard.tscn")
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
@@ -81,13 +82,20 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 50
 	hurtbox.create_hit_effect()
-	velocity = -velocity
+	velocity = -velocity*1.5
 
 
 sync func _no_health():
-	$enemyDeath.play()
 	queue_free()
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
+	if stats.drop == "card":
+		var item = Item.instance()
+		get_parent().add_child(item)
+		item.global_position = global_position
+	elif stats.drop == "demo":
+		var end  = get_tree().get_root().get_node("Scene2/EndLayer/End/ColorRect")
+		end.visible = true
+		get_tree().paused = true
 

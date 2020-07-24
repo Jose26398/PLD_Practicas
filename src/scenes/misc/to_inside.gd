@@ -17,7 +17,7 @@ func _ready():
 	
 
 func _on_body_entered(body):
-	if body is Player:
+	if body is Player and body.stats.items.has("card"):
 		SceneChanger.set_spawnpoint(doorSpawn)
 		SceneChanger.set_health(body.get_node("PlayerStats").health)
 		SceneChanger.change_scene(target_scene)

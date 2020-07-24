@@ -13,7 +13,7 @@ func set_paused(value: bool) -> void:
 	paused = value
 	scene_tree.paused = value
 	pause_overlay.visible = value
-	
+
 func _unhandled_input(event):
 	if event.is_action_pressed("Pause"):
 		self.paused = not paused
@@ -39,8 +39,10 @@ func _on_Save_pressed():
 	var health = {"health" : stats.health}
 	var position = {"pos_x" : stats.get_parent().position.x,
 					"pos_y" : stats.get_parent().position.y}
+	var items = {"items" : stats.items}
 	save_game.store_line(to_json(health))
 	save_game.store_line(to_json(position))
+	save_game.store_line(to_json(items))
 	save_game.close()
 
 

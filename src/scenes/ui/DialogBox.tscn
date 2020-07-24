@@ -5,7 +5,7 @@
 [ext_resource path="res://fonts/dialogs.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/ui/DialogBox.gd" type="Script" id=4]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.509804, 0.376471, 0.901961, 0.772549 )
 border_width_right = 5
 border_width_bottom = 4
@@ -13,7 +13,7 @@ border_color = Color( 0.431373, 0.34902, 0.682353, 1 )
 corner_radius_top_left = 13
 corner_radius_bottom_right = 6
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.509804, 0.376471, 0.901961, 0.635294 )
 border_width_right = 5
 border_width_bottom = 4
@@ -21,7 +21,7 @@ border_color = Color( 0.407843, 0.117647, 0.572549, 1 )
 corner_radius_top_left = 13
 corner_radius_bottom_right = 6
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 15
 extra_spacing_top = 4
 extra_spacing_char = 4
@@ -52,16 +52,17 @@ __meta__ = {
 }
 
 [node name="Character" type="RichTextLabel" parent="."]
-margin_left = 151.0
-margin_top = 20.0
-margin_right = 468.0
-margin_bottom = 60.0
+anchor_left = 0.089455
+anchor_top = 0.0682594
+anchor_right = 0.277251
+anchor_bottom = 0.204778
+margin_bottom = 3.8147e-06
 custom_fonts/normal_font = ExtResource( 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_text = "????????"
 text = "????????"
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Dialog" type="RichTextLabel" parent="."]
@@ -85,9 +86,9 @@ anchor_top = 0.774744
 anchor_right = 0.979858
 anchor_bottom = 0.870307
 margin_left = 6.10352e-05
-custom_styles/hover = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_hover = Color( 0.0313726, 0.0156863, 0.0156863, 1 )
 text = "NEXT"
 __meta__ = {
